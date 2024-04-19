@@ -1,0 +1,434 @@
+openapi: 3.0.3
+info:
+  title: API BETI
+  version: 2.0.0
+  description: API for collecting data from POWER solutions.
+paths:
+  /api/locations/:
+    get:
+      operationId: locations_retrieve
+      tags:
+      - locations
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/metrics/:
+    get:
+      operationId: metrics_retrieve
+      tags:
+      - metrics
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/new_bei/:
+    post:
+      operationId: new_bei_create
+      description: |-
+        Send data for creations of: Address , Site, Bei and Installation instances, formated in JSON. Formate the data in
+
+        Fill the client's password with "pass", it does not matter.
+        Args:
+            request (dictionnary): contains the sent data in request.data (dictionnary)
+
+        Returns:
+            Response : Status of the operation (201 if successfuly created)
+      tags:
+      - new_bei
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Installation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Installation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Installation'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Installation'
+          description: ''
+  /api/new_client/:
+    post:
+      operationId: new_client_create
+      tags:
+      - new_client
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Client'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Client'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+          description: ''
+  /api/new_data_acquisition/:
+    post:
+      operationId: new_data_acquisition_create
+      description: |-
+        Creates a data_acquisition dataset for the connected bei_user to regsiter in the DB.
+        Args:
+            request (request): contains the data to register and the connected user object.
+      tags:
+      - new_data_acquisition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Data_acquisition'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Data_acquisition'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Data_acquisition'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Data_acquisition'
+          description: ''
+  /api/new_door_event/:
+    post:
+      operationId: new_door_event_create
+      description: |-
+        Creates a door_event dataset for the connected bei_user to regsiter in the DB.
+        Args:
+            request (request): contains the data to register and the connected user object.
+      tags:
+      - new_door_event
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/new_many_beis/:
+    post:
+      operationId: new_many_beis_create
+      description: |-
+        Send file with data for creation of Address, Site, Bei and Maintenance instances.
+
+        Args:
+            request (Object): contains the sent file in request.data (dictionnary)
+
+        Returns:
+            Response : Status of the operation (201 if successfuly created)
+      tags:
+      - new_many_beis
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileUpload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/FileUpload'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUpload'
+        required: true
+      security:
+      - jwtAuth: []
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUpload'
+          description: ''
+  /api/token/:
+    post:
+      operationId: token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        city:
+          type: string
+          maxLength: 45
+        zipcode:
+          type: string
+          maxLength: 10
+        street:
+          type: string
+          maxLength: 45
+        street_number:
+          type: integer
+        suplement:
+          type: string
+          maxLength: 45
+        lat:
+          type: number
+          format: double
+        lng:
+          type: number
+          format: double
+      required:
+      - city
+      - lat
+      - lng
+      - street
+      - street_number
+      - zipcode
+    Bei:
+      type: object
+      properties:
+        serial_number:
+          type: string
+          maxLength: 45
+        fuel_capacity:
+          type: string
+          maxLength: 45
+        client:
+          $ref: '#/components/schemas/Client'
+        password:
+          type: string
+          maxLength: 150
+      required:
+      - client
+      - fuel_capacity
+      - password
+      - serial_number
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 45
+        password:
+          type: string
+          maxLength: 150
+      required:
+      - id
+      - name
+      - password
+    Data_acquisition:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        bei:
+          type: integer
+        bat_temp:
+          type: integer
+        solar_logd:
+          type: integer
+        spd_alarm:
+          type: integer
+        gen_alarm:
+          type: integer
+        totalpower:
+          type: number
+          format: double
+        fuel_level:
+          type: number
+          format: double
+        ext_temp:
+          type: integer
+        ge_temp:
+          type: integer
+        soc:
+          type: number
+          format: double
+        main_alarm:
+          type: integer
+        ems_com_fail_alarm:
+          type: integer
+        door_contact_alarm:
+          type: integer
+        pbat:
+          type: number
+          format: double
+        psol:
+          type: number
+          format: double
+        pload:
+          type: number
+          format: double
+      required:
+      - bat_temp
+      - bei
+      - door_contact_alarm
+      - ems_com_fail_alarm
+      - ext_temp
+      - fuel_level
+      - ge_temp
+      - gen_alarm
+      - main_alarm
+      - pbat
+      - pload
+      - psol
+      - soc
+      - solar_logd
+      - spd_alarm
+      - time
+      - totalpower
+    FileUpload:
+      type: object
+      description: |-
+        File upload storage
+
+        Args:
+            serializers (_type_): Django Serializer class
+      properties:
+        file:
+          type: string
+          format: uri
+      required:
+      - file
+    Installation:
+      type: object
+      properties:
+        site:
+          $ref: '#/components/schemas/Site'
+        bei:
+          $ref: '#/components/schemas/Bei'
+        installation_date:
+          type: string
+          format: date-time
+      required:
+      - bei
+      - installation_date
+      - site
+    Site:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 45
+        address:
+          $ref: '#/components/schemas/Address'
+      required:
+      - address
+      - name
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          readOnly: true
+      required:
+      - access
+      - password
+      - refresh
+      - username
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+          writeOnly: true
+      required:
+      - access
+      - refresh
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

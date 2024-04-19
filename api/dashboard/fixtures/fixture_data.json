@@ -1,0 +1,180 @@
+[ 
+    {
+        "model": "dashboard.client",
+        "fields": {
+            "id": 1,
+            "name": "owner_01", 
+            "password": "pass_cli1", 
+            "created_at": "2023-01-03 07:15:20", 
+            "updated_at": "2023-01-03 07:15:20" 
+        }
+    }, 
+    {
+        "model": "dashboard.client",
+        "fields": {
+            "id": 2,
+            "name": "owner_02", 
+            "password": "pass_cli2", 
+            "created_at": "2023-01-03 07:15:20", 
+            "updated_at": "2023-01-03 07:15:20" 
+        }
+    }, 
+    {
+        "model": "dashboard.address",
+        "fields": {
+            "id": 1,
+            "city": "SQF",
+            "zipcode": "38070",
+            "street": "rue du Mollaret", 
+            "street_number": "1", 
+            "suplement":"",
+            "lat": 45.6478152, 
+            "lng": 5.1035071, 
+            "created_at": "2022-09-21 07:15:20", 
+            "updated_at": "2022-09-21 07:15:20" 
+        }
+    }, 
+    {
+        "model": "dashboard.site",
+        "fields": {
+            "id": 1,
+            "name": "SQF",
+            "address": 1, 
+            "created_at": "2022-09-21 07:15:20", 
+            "updated_at": "2022-09-21 07:15:20" 
+        }
+    }, 
+    {
+        "model": "dashboard.bei", 
+        "fields": { 
+            "id": 1,
+            "serial_number": "22_001",
+            "fuel_capacity": 300, 
+            "client": 1, 
+            "password": "pass_bei1", 
+            "created_at": "2022-09-29 08:30:20", 
+            "updated_at": "2022-09-29 08:30:20" 
+        }
+    }, 
+    {
+        "model": "dashboard.installation", 
+        "fields": { 
+            "id": 1,
+            "site": 1,
+            "bei": 1,
+            "installation_date": "2022-09-29 08:30:20", 
+            "created_at": "2022-09-29 08:30:20", 
+            "updated_at": "2022-09-29 08:30:20" 
+        }
+    }, 
+    {
+        "model": "dashboard.maintenance",
+        "fields": {
+            "id": 1,
+            "bei": 1,
+            "description": "Démarrage après installation", 
+            "maintenance_name": "Démarrage 22_001", 
+            "maintenance_date": "2022-09-21", 
+            "created_at": "2022-09-21 07:15:20", 
+            "updated_at": "2022-09-21 07:15:20" 
+        }
+    }, 
+    {
+        "model": "data_acquisition.door_event",
+        "fields": {
+            "time": "2023-01-03 07:15:40",
+            "bei": 1,
+            "state": 1 
+        }
+    }, 
+    {
+        "model": "data_acquisition.door_event",
+        "fields": {
+            "time": "2023-01-03 07:20:30",
+            "bei": 1,
+            "state": 0 
+        }
+    }, 
+    {
+        "model": "data_acquisition.door_event",
+        "fields": {
+            "time": "2023-01-03 07:25:30",
+            "bei": 1,
+            "state": 1 
+        }
+    }, 
+    {
+        "model": "data_acquisition.door_event",
+        "fields": {
+            "time": "2023-01-03 07:30:30",
+            "bei": 1,
+            "state": 1 
+        }
+    }, 
+    {
+        "model": "data_acquisition.data_acquisition",
+        "fields": {
+            "time": "2023-01-03 07:35:30",
+            "bei": 1, 
+            "bat_temp": 2, 
+            "solar_logd": 3, 
+            "spd_alarm": 4, 
+            "gen_alarm": 5, 
+            "totalpower": 6, 
+            "fuel_level": 7, 
+            "ext_temp": 8,  
+            "ge_temp": 9, 
+            "soc": 10,  
+            "main_alarm": 11, 
+            "ems_com_fail_alarm": 12, 
+            "door_contact_alarm": 13, 
+            "pbat": 14, 
+            "psol": 15,  
+            "pload": 16 
+        }
+    }, 
+    {
+        "model": "data_acquisition.data_acquisition",
+        "fields": {
+            "time": "2023-01-03 07:40:30",
+            "bei": 1, 
+            "bat_temp": 20, 
+            "solar_logd": 21, 
+            "spd_alarm": 22, 
+            "gen_alarm": 23, 
+            "totalpower": 24, 
+            "fuel_level": 25, 
+            "ext_temp": 26,  
+            "ge_temp": 27, 
+            "soc": 28,  
+            "main_alarm": 29, 
+            "ems_com_fail_alarm": 30, 
+            "door_contact_alarm": 31, 
+            "pbat": 32, 
+            "psol": 33,  
+            "pload": 34 
+        }
+    }, 
+    {
+        "model": "data_acquisition.data_acquisition",
+        "fields": {
+            "time": "2023-01-03 07:45:30",
+            "bei": 1, 
+            "bat_temp": 40, 
+            "solar_logd": 41, 
+            "spd_alarm": 42, 
+            "gen_alarm": 43, 
+            "totalpower": 44, 
+            "fuel_level": 45, 
+            "ext_temp": 46,  
+            "ge_temp": 47, 
+            "soc": 48,  
+            "main_alarm": 49, 
+            "ems_com_fail_alarm": 50, 
+            "door_contact_alarm": 51, 
+            "pbat": 52, 
+            "psol": 53,  
+            "pload": 54 
+        }
+    }
+]
