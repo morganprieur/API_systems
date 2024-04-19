@@ -4,5 +4,6 @@
 
 volumes
 api/dashboard/tests 
+api/dashboard/migrations
 perso
 
